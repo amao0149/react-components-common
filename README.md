@@ -17,3 +17,7 @@
 * 可编辑树形图
     * 所在目录：src/CateTree
     * 可编辑节点名称、删除节点、添加子节点
+    * ![](./public/images/tree.png)
+
+## License
+[MIT](LICENSE)

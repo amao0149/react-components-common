@@ -4,13 +4,11 @@ import './index.css'
 import registerServiceWorker from './registerServiceWorker'
 
 import CateTree from 'CateTree'
-import Exp from 'Exp'
 
 function App() {
 	return (
 		<div className="app">
-			{/*<CateTree />*/}
-			<Exp />
+			<CateTree />
 		</div>
 	)
 }
