@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types'
 import { Delete, AddCircleOutline, Edit, Check, Cancel } from '@material-ui/icons'
 import { withStyles } from '@material-ui/core/styles'
-import { Tooltip } from '@material-ui/core'
+// import { Tooltip } from '@material-ui/core'
 
 const iconComponents = {
 	add: {
@@ -43,9 +43,9 @@ function Icon(props) {
 	// console.log('render icon')
 	const Icon = iconComponents[props.type].component
 	return (
-		<Tooltip title={iconComponents[props.type].title} placement="bottom">
+		// <Tooltip title={iconComponents[props.type].title} placement="bottom">
 			<Icon className={props.classes.icon} onClick={props.action} />
-		</Tooltip>
+		// </Tooltip>
 	)
 }
 

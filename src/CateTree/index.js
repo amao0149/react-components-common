@@ -26,8 +26,8 @@ class CateTree extends Component {
 		}, 5000)
 	}
 
-	getItemFromPath(path) {
-		let result = this.state.data
+	getItemFromPath(path, data) {
+		let result = data
 		if (path && Array.isArray(path)) {
 			for(let index of path) {
 				result =	result.children[index]
@@ -36,34 +36,52 @@ class CateTree extends Component {
 		return result
 	}
 
+	changeStateData(path, callback) {
+		const clonedStateData = Object.assign({}, this.state.data)
+		const clonedItem = this.getItemFromPath(path, clonedStateData)
+
+		if (callback) {
+			callback(clonedItem, clonedStateData)
+		}
+	}
+
 	addChildCate = (data) => {
 		const { item, path } = data
-		console.log(this.getItemFromPath(path))
 
-		if (!item.children) {
-			item.children = []
-		}
-		item.children.push({id: Date.now(), name: `new${Date.now()}`}) // 大bug why ?
-		this.setState({})
-
+		this.changeStateData(path, (clonedItem, clonedStateData) => {
+			if (!clonedItem.children) {
+				clonedItem.children = []
+			}
+			clonedItem.children.push({id: Date.now(), name: `new${Date.now()}`})
+			this.setState({
+				data: clonedStateData
+			})
+		})
 	}
 
 	removeCate = (data) => {
 		const {parent, index, path} = data
-		console.log(this.getItemFromPath(path))
 
-		if (!isNaN(index) && (index >= 0)) {
-			parent.children.splice(index, 1)
-			this.setState({})
-		}
+		this.changeStateData(path.slice(0, -1), (clonedItem, clonedStateData) => {
+			if (!isNaN(index) && (index >= 0)) {
+				clonedItem.children.splice(index, 1)
+				this.setState({
+					data: clonedStateData
+				})
+			} else {
+				alert('不能删除此节点')
+			}
+		})
 	}
 
 	editCate = (data) => {
 		const {item, newName, path} = data
-		console.log(this.getItemFromPath(path))
-
-		item.name = newName
-		this.setState({})
+		this.changeStateData(path, (clonedItem, clonedStateData) => {
+			clonedItem.name = newName
+			this.setState({
+				data: clonedStateData
+			})
+		})
 	}
 
 	render() {
