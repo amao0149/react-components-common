@@ -1,0 +1,16 @@
+.hide {
+	display: none;
+}
+.show {
+	display: block;
+}
+
+.catetree-parent {
+	cursor: pointer;
+	user-select: none;
+}
+
+li {
+	list-style: none;
+}
+
